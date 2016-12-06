@@ -3,7 +3,7 @@ require 'matrix'
 def menu
   ['-----------------------------------------------',
    'Ingrese una opcion',
-   '1) Calcular cantidad de caminos de largo n -1',
+   '1) Calcular cantidad de caminos de largo n - 1',
    '2) Calcular si el grafo es conexo',
    '-----------------------------------------------']
     .join "\n"
@@ -17,12 +17,14 @@ def caminos(matriz)
   potencias = n.times.map { matriz }.inject(1, :*)
   c = (Matrix.identity(matriz.row_count) + potencias)
 
-  puts c
+  c.row_vectors.map(&:to_a).each do |a|
+    puts a.to_s
+  end
 end
 
 def conexo?(matriz)
   vertices = matriz.each.inject(0, :+)
-  potencias = (vertices - 1).times.map { |i| matriz**(i + 1) }
+  potencias = (vertices).times.map { |i| matriz**(i + 1) }
   c = (Matrix.identity(matriz.row_count) + potencias).inject(0, :+)
 
   if c.all? { |coef| coef > 0 }
