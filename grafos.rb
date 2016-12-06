@@ -15,7 +15,7 @@ def caminos(matriz)
   n = readline.strip.to_i
 
   potencias = n.times.map { matriz }.inject(1, :*)
-  # c = (Matrix.identity(matriz.row_count) + potencias)
+  c = (Matrix.identity(matriz.row_count) + potencias)
 
   puts c
 end
